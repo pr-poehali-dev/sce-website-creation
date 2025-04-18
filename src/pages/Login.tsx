@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import AuthForm from '@/components/auth/AuthForm';
@@ -20,11 +20,12 @@ const Login: React.FC = () => {
   // Получаем URL для перенаправления после входа (если есть)
   const from = location.state?.from?.pathname || '/';
 
-  // Если пользователь уже аутентифицирован, перенаправляем на главную или предыдущую страницу
-  if (isAuthenticated) {
-    navigate(from);
-    return null;
-  }
+  // Используем useEffect для перенаправления, чтобы избежать ошибки обновления компонента во время рендеринга
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from);
+    }
+  }, [isAuthenticated, navigate, from]);
 
   const handleLogin = async (data: LoginData) => {
     setIsSubmitting(true);
@@ -57,6 +58,11 @@ const Login: React.FC = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Избегаем прямого перенаправления в теле компонента
+  if (isAuthenticated) {
+    return null;
+  }
 
   return (
     <Layout>

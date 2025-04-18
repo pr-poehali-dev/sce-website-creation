@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import AuthForm from '@/components/auth/AuthForm';
@@ -19,11 +19,12 @@ const Register: React.FC = () => {
   const { register, isAuthenticated } = useAuthContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Если пользователь уже аутентифицирован, перенаправляем на главную
-  if (isAuthenticated) {
-    navigate('/');
-    return null;
-  }
+  // Используем useEffect для перенаправления, чтобы избежать ошибки обновления компонента во время рендеринга
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleRegister = async (data: RegisterData) => {
     setIsSubmitting(true);
@@ -56,6 +57,11 @@ const Register: React.FC = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Избегаем прямого перенаправления в теле компонента
+  if (isAuthenticated) {
+    return null;
+  }
 
   return (
     <Layout>

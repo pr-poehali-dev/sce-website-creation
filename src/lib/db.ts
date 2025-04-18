@@ -389,5 +389,13 @@ export const getNextObjectId = (): string => {
   return `sce-${nextNumber.toString().padStart(3, '0')}`;
 };
 
+// Очистка объектов SCE из базы
+export const clearAllObjects = (): void => {
+  localStorage.setItem('sce-objects', JSON.stringify([]));
+};
+
 // Инициализация базы данных при импорте модуля
 initDatabase();
+
+// Удаляем все объекты SCE из базы
+clearAllObjects();
