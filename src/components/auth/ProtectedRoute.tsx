@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
   requiredPermission?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
   children, 
   requiredPermission 
 }) => {
@@ -17,7 +17,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // Пока проверяем аутентификацию, показываем загрузку
   if (isLoading) {
     return <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin h-8 w-8 border-4 border-sce-primary rounded-full border-t-transparent"></div>
+      <div className="animate-spin h-8 w-8 border-4 border-primary rounded-full border-t-transparent"></div>
     </div>;
   }
 
