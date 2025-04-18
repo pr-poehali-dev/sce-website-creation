@@ -34,21 +34,13 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* SCE Theme Colors */
+    --sce-background: 0 0% 98%;
+    --sce-foreground: 0 0% 10%;
+    --sce-primary: 0 70% 45%;
+    --sce-secondary: 0 0% 95%;
+    --sce-accent: 0 60% 55%;
+    --sce-dark: 0 0% 15%;
   }
 
   .dark {
@@ -79,14 +71,14 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* SCE Theme Dark Colors */
+    --sce-background: 0 0% 15%;
+    --sce-foreground: 0 0% 95%;
+    --sce-primary: 0 60% 50%;
+    --sce-secondary: 0 0% 20%;
+    --sce-accent: 0 60% 60%;
+    --sce-dark: 0 0% 10%;
   }
 }
 
@@ -96,6 +88,19 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-sce-background text-sce-foreground;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .sce-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .sce-logo {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 0.1em;
   }
 }
