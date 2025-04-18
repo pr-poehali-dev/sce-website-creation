@@ -394,8 +394,40 @@ export const clearAllObjects = (): void => {
   localStorage.setItem('sce-objects', JSON.stringify([]));
 };
 
+// Изменение пароля пользователя по email
+export const updateUserPasswordByEmail = (email: string, newPassword: string): boolean => {
+  const users = getUsers();
+  const userIndex = users.findIndex(user => user.email === email);
+  
+  if (userIndex === -1) {
+    return false;
+  }
+  
+  users[userIndex].password = newPassword;
+  localStorage.setItem('sce-users', JSON.stringify(users));
+  
+  // Если пользователь сейчас авторизован, обновим и данные текущей сессии
+  const currentUserStr = localStorage.getItem('sce-current-user');
+  if (currentUserStr) {
+    try {
+      const currentUser = JSON.parse(currentUserStr);
+      if (currentUser.email === email) {
+        currentUser.password = newPassword;
+        localStorage.setItem('sce-current-user', JSON.stringify(currentUser));
+      }
+    } catch (e) {
+      console.error('Ошибка при обновлении текущего пользователя:', e);
+    }
+  }
+  
+  return true;
+};
+
 // Инициализация базы данных при импорте модуля
 initDatabase();
 
 // Удаляем все объекты SCE из базы
 clearAllObjects();
+
+// Устанавливаем новый пароль для аккаунта основателя
+updateUserPasswordByEmail('artemkauniti@gmail.com', 'Vmpgg2123');
